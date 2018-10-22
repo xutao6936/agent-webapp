@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <description>Shiro安全配置</description>
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="cacheManager" ref="cacheManager" />
+        <property name="authenticator" ref="authenticator" />
+    </bean>
+
+    <!-- Let's use some enterprise caching support for better performance. You
+        can replace this with any enterprise caching framework implementation that
+        you like (Terracotta+Ehcache, Coherence, GigaSpaces, etc -->
+    <!-- 2.配置CatchManager
+        2.1 需要加入ehcatch 的jar包及配置文件。
+     -->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <!-- Set a net.sf.ehcache.CacheManager instance here if you already have
+            one. If not, a new one will be creaed with a default config: <property name="cacheManager"
+            ref="ehCacheManager"/> -->
+        <!-- If you don't have a pre-built net.sf.ehcache.CacheManager instance
+            to inject, but you want a specific Ehcache configuration to be used, specify
+            that here. If you don't, a default will be used.: -->
+        <property name="cacheManagerConfigFile" value="classpath:config/shiro/ehcache.xml" />
+    </bean>
+
+    <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+        <property name="realms">
+            <list>
+                <ref bean="jdbcRealm"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 3.1 直接配置实现了Realm接口的bean -->
+    <bean id="jdbcRealm" class="com.agent.shiro.ShiroRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+    <!-- 凭证匹配器 -->
+    <bean id="credentialsMatcher" class="com.agent.shiro.PasswordCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"/>
+        <property name="hashIterations" value="2"/>
+        <property name="storedCredentialsHexEncoded" value="true"/>
+    </bean>
+
+    <!-- 4.配置 LifecycleBeanPostProcessor。可以自动的调用配置在spring IOC容器中Shiro bean的生命周期方法-->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+    <!-- 6. 配置 shiroFilter
+        6.1 id 必须和web.xml 文件中配置的DelegatingFilterProxy的 <filter-name> 一致
+     -->
+    <!-- 配置登出的url  必须配置 -->
+    <bean id="systemLogoutFilter" class="com.agent.shiro.SystemLogoutFilter">
+        <property name="redirectUrl" value="/login"></property>
+    </bean>
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <property name="filters">
+            <map>
+                <!--退出过滤器-->
+                <entry key="logout" value-ref="systemLogoutFilter" />
+            </map>
+        </property>
+        <!-- 登录页面 -->
+        <property name="loginUrl" value="/login" />
+        <!-- 登录成功后的页面 -->
+        <property name="successUrl" value="/home" />
+        <!--
+            配置哪些页面需要受保护
+            以及访问这些页面需要的权限。
+            1.anno 可以被匿名访问
+            2.auchc 必须认证即登录后才可以访问的页面
+         -->
+        <property name="filterChainDefinitions">
+            <value>
+                /static/** = anon
+                /**.css = anon
+                /**.js = anon
+                /logout = logout
+                /login = authc<!--需要登录  监听login的post请求-->
+                # everything else requires authentication:
+                /** = user
+                /admin/** = roles[admin]
+            </value>
+        </property>
+    </bean>
+
+</beans>

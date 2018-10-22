@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agent.repository.WorkOrderMapper">
+    
+    <resultMap id="workOrderMap" type="com.agent.entity.WorkOrder">
+        <id column="id" property="id"  javaType="java.lang.Integer"></id>
+        <result column="caller_number" property="callerNumber" javaType="java.lang.String"></result>
+        <result column="serial_no" property="serialNo" javaType="java.lang.String"></result>
+        <result column="problem" property="problem" javaType="java.lang.String"></result>
+        <result column="status" property="status" javaType="java.lang.String"></result>
+        <result column="create_time" property="createTime" javaType="java.util.Date"></result>
+        <result column="update_time" property="updateTime" javaType="java.util.Date"></result>
+        <result column="creator" property="creator" javaType="java.lang.Integer"></result>
+    </resultMap>
+    
+    <select id="find" resultMap="workOrderMap" parameterType="com.agent.entity.WorkOrder">
+        SELECT
+        id,
+        caller_number,
+        serial_no,
+        problem,
+        status,
+        create_time,
+        update_time,
+        creator
+        from tbl_work_order
+        where 1=1
+        <if test="statusCondition != null">
+            <foreach collection="statusCondition"  index="index" open=" and status in (" close=")" separator="," item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="beginDate != null and endDate != null">
+            and create_time between #{beginDate} and #{endDate}
+        </if>
+        <if test="callerNumber != null and callerNumber != ''">
+            and caller_number=#{callerNumber}
+        </if>
+        <if test="creator != null and creator != ''">
+            and creator=#{creator}
+        </if>
+    </select>
+    <update id="update" parameterType="com.agent.entity.WorkOrder">
+        update tbl_work_order set update_time = #{updateTime}
+        ,status = #{status} where id= #{id}
+    </update>
+
+    <insert id="insert" parameterType="com.agent.entity.WorkOrder">
+        insert into tbl_work_order(
+            caller_number,
+            serial_no,
+            problem,
+            status,
+            create_time,
+            update_time,
+            creator
+        )VALUES (
+            #{callerNumber},
+            #{serialNo},
+            #{problem},
+            #{status},
+            #{createTime},
+            #{updateTime},
+            #{creator}
+        )
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,32 @@
+.datagrilBtn{
+	padding: 3px;
+}
+.datagrilBtn-header{
+	height: 35px;
+}
+.datagrilBtn-header-left{
+	text-align: left; 
+	float: left;
+}
+.datagrilBtn-header-right{
+	text-align: right;
+	float: right;
+	margin-right: 5px
+}
+.datagrilBtn-footer{
+	text-align: right;
+	margin-top: 10px;
+}
+.border-top{
+	border-top: 1px solid #95B8E7;
+	border-bottom: 0;
+	border-left: 0;
+	border-right: 0;
+}
+
+.datagrid-btable .datagrid-cell{
+ padding:6px 4px;
+ overflow: hidden;
+ text-overflow:ellipsis;
+ white-space: nowrap;
+}

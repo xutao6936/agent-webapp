@@ -1,0 +1,60 @@
+var navs = [{
+	"title": "租户管理",
+	"icon": "fa-cubes",
+	"spread": false,
+	"href": "${ctx}/tenants/forward"
+}, {
+	"title": "系统管理",
+	"icon": "&#xe620;",
+	"spread": false
+}, {
+	"title": "组织管理",
+	"icon": "&#xe62d;",
+	"spread": false
+}, {
+	"title": "用户管理",
+	"icon": "&#xe612;",
+	"spread": false
+}, {
+	"title": "菜单管理",
+	"icon": "&#xe649;",
+	"spread": false
+}, {
+	"title": "角色管理",
+	"icon": "&#xe613;",
+	"spread": false
+}, {
+	"title": "权限管理",
+	"icon": "&#xe64c;",
+	"spread": false
+}, {
+	"title": "区域管理",
+	"icon": "&#xe604;",
+	"spread": false
+}, {
+	"title": "编码管理",
+	"icon": "&#xe635;",
+	"spread": false
+}, {
+	"title": "业务配置",
+	"icon": "&#xe614;",
+	"spread": false,
+	"children": [{
+		"title": "通话类型",
+		"icon": "&#xe611;",
+		"href": "begtable.html"
+	}, {
+		"title": "服务项目",
+		"icon": "&#xe60f;",
+		"href": "navbar.html"
+	}]
+}, {
+	"title": "App管理",
+	"icon": "&#xe63b;",
+	"spread": false,
+	"children": [{
+		"title": "App租户管理",
+		"icon": "fa-cubes",
+		"href": "icheck.html"
+	}]
+}];

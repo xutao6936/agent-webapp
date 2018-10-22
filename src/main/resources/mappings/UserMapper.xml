@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agent.repository.UserMapper">
+    
+    <resultMap id="userMap" type="com.agent.entity.User">
+        <id column="id" property="id"  javaType="java.lang.Integer"></id>
+        <result column="user_name" property="userName" javaType="java.lang.String"></result>
+        <result column="password" property="password" javaType="java.lang.String"></result>
+        <result column="dept_id" property="deptId" javaType="java.lang.Integer"></result>
+        <result column="role_id" property="roleId" javaType="java.lang.Integer"></result>
+        <result column="enabled" property="enabled" javaType="java.lang.Boolean"></result>
+        <result column="description" property="description" javaType="java.lang.String"></result>
+        <result column="age" property="age" javaType="java.lang.Integer"></result>
+        <result column="sex" property="sex" javaType="java.lang.String"></result>
+        <result column="create_time" property="createTime" javaType="java.sql.Date"></result>
+        <result column="update_time" property="updateTime" javaType="java.sql.Date"></result>
+        <result column="creator" property="creator" javaType="java.lang.String"></result>
+    </resultMap>
+    
+    <select id="findOne" resultMap="userMap" parameterType="java.util.HashMap">
+        SELECT
+        id,
+        user_name,
+        password,
+        dept_id,
+        role_id,
+        enabled,
+        description,
+        telphone,
+        sex,
+        age,
+        create_time,
+        update_time,
+        creator
+        from tbl_user
+        where 1=1
+        <if test="userName != null">
+            and user_name=#{userName}
+        </if>
+        <if test="password != null">
+            and password=#{password}
+        </if>
+    </select>
+
+    <select id="list" resultMap="userMap" parameterType="java.util.HashMap">
+        SELECT
+        id,
+        user_name,
+        password,
+        dept_id,
+        role_id,
+        enabled,
+        description,
+        telphone,
+        sex,
+        age,
+        create_time,
+        update_time,
+        creator
+        from tbl_user
+        where
+        1=1
+        <if test="userName != null">
+            and user_name=#{userName}
+        </if>
+        <if test="password != null">
+         and password=#{password}
+        </if>
+    </select>
+
+
+</mapper>
