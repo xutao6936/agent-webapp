@@ -26,7 +26,7 @@
         <mybatis-spring.version>1.2.2</mybatis-spring.version>
         <hibernate.version>4.3.1.Final</hibernate.version>
         <oracle.jdbc.version>10.2.0.1.0</oracle.jdbc.version>
-        <mysql.jdbc.version>5.1.18</mysql.jdbc.version>
+        <mysql.jdbc.version>8.0.16</mysql.jdbc.version>
         <tomcat.jdbc.version>8.5.23</tomcat.jdbc.version>
         <tomcat-websocket.version>8.0.24</tomcat-websocket.version>
         <log4j.version>1.2.1</log4j.version>
