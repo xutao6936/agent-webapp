@@ -15,7 +15,7 @@
         <jdk.version>1.6</jdk.version>
         <javax.websocket.version>1.0</javax.websocket.version>
         <servlet.version>2.5</servlet.version>
-        <junit.version>4.10</junit.version>
+        <junit.version>4.13.1</junit.version>
         <jsp.version>2.0</jsp.version>
         <servlet.jstl.version>1.2</servlet.jstl.version>
         <spring.version>4.1.9.RELEASE</spring.version>
