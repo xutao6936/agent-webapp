@@ -22,7 +22,7 @@
         <validator.version>5.1.1.Final</validator.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <aspect.version>1.7.4</aspect.version>
-        <mybatis.version>3.2.8</mybatis.version>
+        <mybatis.version>3.5.6</mybatis.version>
         <mybatis-spring.version>1.2.2</mybatis-spring.version>
         <hibernate.version>4.3.1.Final</hibernate.version>
         <oracle.jdbc.version>10.2.0.1.0</oracle.jdbc.version>
