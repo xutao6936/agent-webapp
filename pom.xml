@@ -18,7 +18,7 @@
         <junit.version>4.10</junit.version>
         <jsp.version>2.0</jsp.version>
         <servlet.jstl.version>1.2</servlet.jstl.version>
-        <spring.version>4.1.9.RELEASE</spring.version>
+        <spring.version>5.2.20.RELEASE</spring.version>
         <validator.version>5.1.1.Final</validator.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <aspect.version>1.7.4</aspect.version>
